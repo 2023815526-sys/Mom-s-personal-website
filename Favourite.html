@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mom's Favourites</title>
+    <meta name="description" content="Discover mom's favourite things, music, and simple joys in life">
+    <link rel="shortcut icon" href="star.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --warm-brown: #6F4E37;
+            --cream: #F5E8D0;
+            --dark-green: #8A9A5B;
+            --white: #FFFFFF;
+            --black: #000000;
+            --transition: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+            background: var(--cream);
+            color: var(--black);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        
+        .nav-bar {
+            background: var(--warm-brown);
+            padding: 16px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .nav-left img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            border-bottom: 2px solid var(--dark-green);
+        }
+
+               .container {
+            max-width: 1100px;
+            background: rgba(245, 232, 208, 0.95);
+            margin: 90px auto;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
+        }
+
+        
+        .page-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 40px;
+            color: var(--warm-brown);
+        }
+
+               .section-title {
+            text-align: center;
+            color: var(--dark-green);
+            margin: 40px 0 20px;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--warm-brown);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: var(--warm-brown);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+               .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .photo-card {
+            background: var(--white);
+            padding: 12px 12px 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .photo-card:hover {
+            transform: scale(1.05);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .caption {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.95rem;
+            color: var(--warm-brown);
+            font-weight: 500;
+        }
+
+        /* Music Section */
+        .music-section {
+            margin-top: 50px;
+        }
+
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .music-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            border-left: 4px solid var(--dark-green);
+        }
+
+        .music-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .music-card audio {
+            width: 100%;
+            margin: 15px 0;
+        }
+
+        .song-title {
+            text-align: center;
+            font-weight: 600;
+            color: var(--dark-green);
+            margin-top: 15px;
+            font-size: 1.1rem;
+        }
+
+        
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 15px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+       
+        footer {
+            background: var(--warm-brown);
+            color: var(--white);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 60px;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+               @media (max-width: 768px) {
+            .nav-bar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .container {
+                margin: 30px 15px;
+                padding: 25px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .music-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-left {
+                font-size: 1.3rem;
+            }
+            
+            .nav-left img {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+        <nav class="nav-bar" aria-label="Main Navigation">
+        <div class="nav-left">
+            <img src="star.png" alt="Favourite Logo" loading="lazy">
+            <span>Much-Loved</span>
+        </div>
+        <div class="nav-links">
+            <a href="About Mom's.html">About Mom's</a>
+            <a href="story.html">Story</a>
+            <a href="education.html">Education</a>
+            <a href="photo.html">Photos</a>
+            <a href="Favourite.html" aria-current="page">Mom's Picks</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+        <main class="container">
+        <header>
+            <h1 class="page-title">Mom's Favourites</h1>
+            <p class="subtitle">Simple joys that warm the heart</p>
+        </header>
+
+               <section>
+            <h2 class="section-title">Favourite Things</h2>
+            <p class="section-subtitle">
+                <i>Her favourite things reflect her simple joys in life - moments of peace, warmth, and happiness. These small details remind us that love often lives in the simplest things.</i>
+            </p>
+
+            
+            <div class="gallery">
+                <div class="photo-card">
+                    <img src="lemon.jpg" alt="Literally Lemon Ice drink" loading="lazy">
+                    <div class="caption">Literally Lemon Ice</div>
+                </div>
+                <div class="photo-card">
+                    <img src="laksa.jpg" alt="Laksa Sarawak" loading="lazy">
+                    <div class="caption">Laksa Sarawak</div>
+                </div>
+                <div class="photo-card">
+                    <img src="capybara.jpg" alt="Capybara animal" loading="lazy">
+                    <div class="caption">Capybara (Mom's mood)</div>
+                </div>
+                <div class="photo-card">
+                    <img src="bungaa.jpg" alt="Favorite flower" loading="lazy">
+                    <div class="caption">Favorite Flower</div>
+                </div>
+            </div>
+        </section>
+
+                <section class="music-section">
+            <h2 class="section-title">Music</h2>
+            <p class="section-subtitle">
+                <i>Mom's favorite songs that warm the heart and bring comfort.</i>
+            </p>
+
+                       <div class="music-grid">
+                <div class="music-card">
+                    <audio controls>
+                        <source src="Handlebars.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <div class="song-title">Handlebars - Jennie & Dua Lipa</div>
+                </div>
+
+                <div class="music-card">
+                    <audio controls>
+                        <source src="Risk.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <div class="song-title">Risk - Gracie Abrams</div>
+                </div>
+
+                <div class="music-card">
+                    <audio controls>
+                        <source src="The FOO.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <div class="song-title">The Fate of Ophelia - Taylor Swift</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+        <div class="lightbox" id="lightbox" role="dialog" aria-label="Image Lightbox" aria-hidden="true">
+        <button class="close-btn" onclick="closeLightbox()" aria-label="Close lightbox">&times;</button>
+        <img id="lightbox-img" alt="Enlarged view">
+    </div>
+
+   
+    <footer>
+        <p><b>© 2025 Si Bongsu | Made with love 💛</b></p>
+        <p>This website is made to fulfill IMD318 Individual Project</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imgs = document.querySelectorAll('.photo-card img');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const closeBtn = document.querySelector('.close-btn');
+
+           
+            imgs.forEach(img => {
+                img.addEventListener('click', () => {
+                    lightboxImg.src = img.src;
+                    lightboxImg.alt = img.alt;
+                    lightbox.classList.add('active');
+                    lightbox.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+           
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                lightbox.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+
+           
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+
+                        lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+                       window.closeLightbox = closeLightbox;
+        });
+    </script>
+</body>
+</html>
